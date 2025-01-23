@@ -2,8 +2,7 @@ import { Router } from 'express'
 import { env } from '../env'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import axios, { options } from 'axios'
-import { title } from 'process'
+import axios from 'axios'
 
 type MessageSendTextProps = {
   phone: string
@@ -76,10 +75,10 @@ type MessageReceivedWebhookProps = {
 
 type Text = {
   message: string
-  descritpion: string
-  title: string
-  url: string
-  thumbnailUrl: string
+  descritpion?: string
+  title?: string
+  url?: string
+  thumbnailUrl?: string
 }
 
 export const router = Router()
