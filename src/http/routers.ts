@@ -226,16 +226,15 @@ router.post<MessageSendWebhookProps>('/on-message-send-webhook', (req, res) => {
 router.post<MessageReceivedWebhookProps>('/on-message-received-webhook', (req, res) => {
   console.log(req.body)
 
-  const {
-    referenceMessageId,
-    buttonsResponseMessage: { message },
-  } = req.body
+  const { referenceMessageId, buttonsResponseMessage } = req.body
 
   if (referenceMessageId) {
-    console.log('Retorno de texto (Lista de Botão)')
-
-    if (message !== undefined && message === 'Sim') {
-      console.log(message)
+    if (buttonsResponseMessage) {
+      console.log('Retorno de texto (Lista de Botão)')
+      const { message } = buttonsResponseMessage
+      if (message === 'Sim') {
+        console.log(message)
+      }
     }
   } else {
     console.log('Retorno de texto')
