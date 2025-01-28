@@ -233,7 +233,8 @@ router.post<MessageReceivedWebhookProps>('/on-message-received-webhook', (req, r
 
   if (referenceMessageId) {
     console.log('Retorno de texto (Lista de Botão)')
-    if (message === 'Sim') {
+
+    if (message !== undefined && message === 'Sim') {
       console.log(message)
     }
   } else {
