@@ -128,7 +128,12 @@ router.post<MessageSendButtonListProps>('/send-button-list', async (req, res) =>
 
   const text = {
     phone,
-    message: `Novo agendamento para o ${formattedDate}. Confirma o agendamento ?`,
+    message: `*CEMI DIAGNÓSTICO* 
+              Você possui AUDIOMETRIA dia 03/02/2025 às 14:30hrs. (ordem de chegada dentro do grupo de horários). Caso não possa comparecer, favor desmarcar pelo WhatsApp ou pelo telefone 2712-1950. 
+              *Preparo para o Exame de Audiometria*
+              Exposição ao Ruído: Evite ambientes com ruídos intensos nas 24 horas que antecedem o exame. Isso ajuda a garantir resultados mais precisos.
+             
+              *Confirma o agendamento* ?`,
     buttonList: {
       buttons: [
         {
@@ -220,5 +225,20 @@ router.post<MessageSendWebhookProps>('/on-message-send-webhook', (req, res) => {
 
 router.post<MessageReceivedWebhookProps>('/on-message-received-webhook', (req, res) => {
   console.log(req.body)
+
+  const {
+    referenceMessageId,
+    buttonsResponseMessage: { message },
+  } = req.body
+
+  if (referenceMessageId) {
+    console.log('Retorno de texto (Lista de Botão)')
+    if (message === 'Sim') {
+      console.log(message)
+    }
+  } else {
+    console.log('Retorno de texto')
+  }
+
   res.json(req.body)
 })
