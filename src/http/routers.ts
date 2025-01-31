@@ -219,8 +219,8 @@ router.post<MessageSendOptionListProps>('/send-option-list', async (req, res) =>
 })
 
 router.post('/on-message-send-webhook', (req, res) => {
-  console.log(req.body)
-  console.log(res)
+  console.log(`Request: ${req}`)
+  console.log(`Request: ${res}`)
   res.json(req.body)
 })
 
