@@ -17,6 +17,10 @@ const api = axios.create({
 })
 
 export async function routes(app: FastifyInstance) {
+  app.get('/', () => {
+    return { message: 'Testanto rota!' }
+  })
+
   app.post(
     '/on-message-send-whatsapp-webhook',
     (request: FastifyRequest<{ Body: MessageSendWebhookProps }>) => {
