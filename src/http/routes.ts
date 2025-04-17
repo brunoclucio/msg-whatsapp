@@ -21,13 +21,18 @@ export async function routes(app: FastifyInstance) {
     return { message: 'Testanto rota!' }
   })
 
-  app.post(
-    '/on-message-send-whatsapp-webhook',
-    (request: FastifyRequest<{ Body: MessageSendWebhookProps }>) => {
-      console.log('body', request.body)
-      return request.body
-    }
-  )
+  // app.post(
+  //   '/on-message-send-whatsapp-webhook',
+  //   (request: FastifyRequest<{ Body: MessageSendWebhookProps }>) => {
+  //     console.log('body', request.body)
+  //     return request.body
+  //   }
+  // )
+
+  app.post('/on-message-send-whatsapp-webhook', request => {
+    console.log('body', request.body)
+    return request.body
+  })
 
   app.post(
     '/on-message-received-whatsapp-webhook',
