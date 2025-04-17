@@ -1,15 +1,22 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import { router } from './routers'
+import { routes } from './routes'
+import fastify from 'fastify'
+import cors from '@fastify/cors'
+import { errorHandler } from './error-handler'
 
-const app = express()
+const app = fastify()
 
-app.use(bodyParser.json())
-
-app.use(router)
-
-app.listen({
-  port: 3333,
+app.register(cors, {
+  origin: '*',
 })
 
-console.log('Servidor Rodando!')
+app.setErrorHandler(errorHandler)
+
+app.register(routes)
+
+app
+  .listen({
+    port: 3333,
+  })
+  .then(() => {
+    console.log('Servidor rodando!')
+  })
