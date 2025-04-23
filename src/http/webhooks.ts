@@ -18,9 +18,13 @@ export async function webhooks(app: FastifyInstance) {
         const { zaapId, messageId, type } = request.body
 
         //Recupera as mensagens na fila da API.
-        const { data: messages } = await api.get<MessagesQueueProps>('/queue?page=1&pageSize=100', {
+        const { data: messages } = await api.get<MessagesQueueProps>('/queue', {
           headers: {
             'Client-Token': env.CLIENT_TOKEN,
+          },
+          params: {
+            page: 1,
+            pageSize: 100,
           },
         })
 
