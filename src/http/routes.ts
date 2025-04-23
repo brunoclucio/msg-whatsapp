@@ -13,7 +13,9 @@ import { ClientError } from '../errors/client-error'
 import { api } from '../lib/axios'
 
 export async function routes(app: FastifyInstance) {
-  app.get('/', () => {})
+  app.get('/', () => {
+    return
+  })
 
   app.post('/send-text', async (request: FastifyRequest<{ Body: MessageSendTextProps }>) => {
     try {
