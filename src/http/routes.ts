@@ -14,7 +14,7 @@ import { api } from '../lib/axios'
 
 export async function routes(app: FastifyInstance) {
   app.get('/', () => {
-    return
+    return { message: 'rota inicial!' }
   })
 
   app.post('/send-text', async (request: FastifyRequest<{ Body: MessageSendTextProps }>) => {

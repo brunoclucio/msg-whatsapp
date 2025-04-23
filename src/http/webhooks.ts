@@ -24,25 +24,28 @@ export async function webhooks(app: FastifyInstance) {
           },
         })
 
+        console.log('messages', messages)
+
         //Caso existam mensagens em fila, verifica se a mensagem que está sendo enviada está presente.
         if (messages) {
-          console.log(messages)
-          messages.map(async message => {
-            //Caso encontre a mensagem, insere na tabela de chats.
-            if (message.ZaapId === zaapId) {
-              console.log('Encontrou a mensagem')
-              const chat = {
-                zaapId,
-                messageId,
-                type,
-                datIncl: new Date(),
-                telefone: message.Phone,
-                mensagem: message.Message,
-              }
+          await Promise.all(
+            messages.map(async message => {
+              //Caso encontre a mensagem, insere na tabela de chats.
+              if (message.ZaapId === zaapId) {
+                console.log('Encontrou a mensagem')
+                const chat = {
+                  zaapId,
+                  messageId,
+                  type,
+                  datIncl: new Date(),
+                  telefone: message.Phone,
+                  mensagem: message.Message,
+                }
 
-              console.log(chat)
-            }
-          })
+                console.log(chat)
+              }
+            })
+          )
         }
 
         return request.body
