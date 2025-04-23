@@ -1,4 +1,4 @@
-import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
+import type { FastifyInstance, FastifyRequest } from 'fastify'
 import type {
   MessageReceivedWebhookProps,
   MessageSendWebhookProps,
@@ -11,10 +11,7 @@ import { api } from '../lib/axios'
 export async function webhooks(app: FastifyInstance) {
   app.post(
     '/on-message-send-whatsapp-webhook',
-    async (
-      request: FastifyRequest<{ Body: MessageSendWebhookProps }>,
-      reply: FastifyReply<{ Body: MessageSendWebhookProps }>
-    ) => {
+    async (request: FastifyRequest<{ Body: MessageSendWebhookProps }>) => {
       try {
         console.log('body', request.body)
 
@@ -48,7 +45,7 @@ export async function webhooks(app: FastifyInstance) {
           })
         }
 
-        return reply.raw
+        return request.body
       } catch (error) {
         console.log('Error:', error)
         throw new ClientError('Erro no webhook de recebimento de mensagens!')
@@ -58,10 +55,7 @@ export async function webhooks(app: FastifyInstance) {
 
   app.post(
     '/on-message-received-whatsapp-webhook',
-    (
-      request: FastifyRequest<{ Body: MessageReceivedWebhookProps }>,
-      reply: FastifyReply<{ Body: MessageReceivedWebhookProps }>
-    ) => {
+    (request: FastifyRequest<{ Body: MessageReceivedWebhookProps }>) => {
       try {
         console.log('body', request.body)
         const { phone, messageId, type, text } = request.body
@@ -84,7 +78,7 @@ export async function webhooks(app: FastifyInstance) {
           console.log(chat)
         }
 
-        return reply.raw
+        return request.body
       } catch (error) {
         console.log('Error:', error)
         throw new ClientError('Erro no webhook de envio de mensagens!')
