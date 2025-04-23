@@ -46,7 +46,7 @@ export async function webhooks(app: FastifyInstance) {
                   mensagem: message.Message,
                 }
 
-                console.log(chat)
+                console.log('chat', chat)
               }
             })
           )
@@ -82,7 +82,7 @@ export async function webhooks(app: FastifyInstance) {
             mensagem: message,
           }
 
-          console.log(chat)
+          console.log('chat', chat)
         }
 
         return request.body
