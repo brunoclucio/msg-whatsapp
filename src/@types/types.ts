@@ -9,6 +9,18 @@ export type MessageSendOptionListProps = {
   optionList: OptionListProps
 }
 
+export type MessageSendPhoneExistsProps = {
+  phone: string
+  exists: true
+}
+
+export type MessageSendPhonesExistsProps = {
+  phones: string[]
+  exists: true
+  inputPhone: string
+  outputPhone: string
+}
+
 export type OptionListProps = {
   title: string
   buttonLabel: string
@@ -40,6 +52,7 @@ export type MessageSendWebhookProps = {
   messageId: string
   type: string
   instanceId: string
+  momment: number
 }
 
 export type MessageReceivedWebhookProps = {
@@ -74,3 +87,18 @@ export type Text = {
   url?: string
   thumbnailUrl?: string
 }
+
+export type MessagesQueueProps = [
+  {
+    _id: string
+    DelayMessage: number
+    Message: string
+    IsTrial: boolean
+    InstanceId: string
+    Phone: string
+    ZaapId: string
+    DelayTyping: number
+    MessageId: string
+    Created: number
+  },
+]

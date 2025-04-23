@@ -1,7 +1,8 @@
-import { routes } from './routes'
-import fastify from 'fastify'
 import cors from '@fastify/cors'
+import fastify from 'fastify'
 import { errorHandler } from './error-handler'
+import { routes } from './routes'
+import { webhooks } from './webhooks'
 
 const app = fastify()
 
@@ -11,6 +12,7 @@ app.register(cors, {
 
 app.setErrorHandler(errorHandler)
 
+app.register(webhooks)
 app.register(routes)
 
 app
