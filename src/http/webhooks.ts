@@ -15,8 +15,11 @@ export async function webhooks(app: FastifyInstance) {
       request: FastifyRequest<{ Body: MessageSendWebhookProps }>,
       reply: FastifyReply<{ Body: MessageSendWebhookProps }>
     ) => {
-      MessageSendWebhook(request.body)
+      const data = request.body
+
       reply.code(200).send({ message: 'Entrou no webhook de envio de mensagens!' })
+
+      MessageSendWebhook(data)
     }
   )
 
@@ -26,8 +29,11 @@ export async function webhooks(app: FastifyInstance) {
       request: FastifyRequest<{ Body: MessageReceivedWebhookProps }>,
       reply: FastifyReply<{ Body: MessageReceivedWebhookProps }>
     ) => {
-      MessageReceivedWebhook(request.body)
+      const data = request.body
+
       reply.code(200).send({ message: 'Entrou no webhook de recebimento de mensagens!' })
+
+      MessageReceivedWebhook(data)
     }
   )
 }
@@ -43,10 +49,10 @@ async function MessageSendWebhook(data: MessageSendWebhookProps) {
       headers: {
         'Client-Token': env.CLIENT_TOKEN,
       },
-      params: {
-        page: 1,
-        pageSize: 100,
-      },
+      // params: {
+      //   page: 1,
+      //   pageSize: 100,
+      // },
     })
 
     console.log('messages', messages)
