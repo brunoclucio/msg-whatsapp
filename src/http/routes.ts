@@ -24,6 +24,7 @@ export async function routes(app: FastifyInstance) {
       const text: MessageSendTextProps = {
         phone,
         message,
+        delayMessage: 5,
       }
 
       const { data } = await api.post<MessageSendTextProps>('/send-text', text, {
