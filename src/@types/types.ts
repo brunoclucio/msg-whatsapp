@@ -95,17 +95,15 @@ export type Text = {
   thumbnailUrl?: string
 }
 
-export type MessagesQueueProps = [
-  {
-    _id: string
-    DelayMessage: number
-    Message: string
-    IsTrial: boolean
-    InstanceId: string
-    Phone: string
-    ZaapId: string
-    DelayTyping: number
-    MessageId: string
-    Created: number
-  },
-]
+export type MessageQueueProps = {
+  _id: string
+  DelayMessage: number
+  Message: string
+  IsTrial: boolean
+  InstanceId: string
+  Phone: string
+  ZaapId: string
+  DelayTyping: number
+  MessageId: string
+  Created: number
+}

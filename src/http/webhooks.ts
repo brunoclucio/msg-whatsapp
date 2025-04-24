@@ -1,8 +1,8 @@
 import type { FastifyInstance, FastifyRequest } from 'fastify'
 import type {
+  MessageQueueProps,
   MessageReceivedWebhookProps,
   MessageSendWebhookProps,
-  MessagesQueueProps,
 } from '../@types/types'
 import { env } from '../env'
 import { ClientError } from '../errors/client-error'
@@ -18,7 +18,7 @@ export async function webhooks(app: FastifyInstance) {
         const { zaapId, messageId, type } = request.body
 
         //Recupera as mensagens na fila da API.
-        const { data: messages } = await api.get<MessagesQueueProps>('/queue', {
+        const { data: messages } = await api.get<MessageQueueProps[]>('/queue', {
           headers: {
             'Client-Token': env.CLIENT_TOKEN,
           },
