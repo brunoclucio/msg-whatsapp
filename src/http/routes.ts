@@ -1,6 +1,5 @@
 import type { FastifyInstance, FastifyRequest } from 'fastify'
 import type {
-  MessageQueueProps,
   MessageReceivedWebhookProps,
   MessageSendButtonListProps,
   MessageSendOptionListProps,
@@ -29,7 +28,7 @@ export async function routes(app: FastifyInstance) {
         const { zaapId, messageId, type } = request.body
 
         //Recupera as mensagens na fila da API.
-        const { data: messages } = await api.get<MessageQueueProps[]>('/queue', {
+        const { data: messages } = await api.get('/queue', {
           headers: {
             'Client-Token': env.CLIENT_TOKEN,
           },
@@ -42,26 +41,26 @@ export async function routes(app: FastifyInstance) {
         console.log('messages', messages)
 
         //Caso existam mensagens em fila, verifica se a mensagem que está sendo enviada está presente.
-        if (messages) {
-          await Promise.all(
-            messages.map(async message => {
-              //Caso encontre a mensagem, insere na tabela de chats.
-              if (message.ZaapId === zaapId) {
-                console.log('Encontrou a mensagem')
-                const chat = {
-                  zaapId,
-                  messageId,
-                  type,
-                  datIncl: new Date(),
-                  telefone: message.Phone,
-                  mensagem: message.Message,
-                }
+        // if (messages) {
+        //   await Promise.all(
+        //     messages.map(async message => {
+        //       //Caso encontre a mensagem, insere na tabela de chats.
+        //       if (message.ZaapId === zaapId) {
+        //         console.log('Encontrou a mensagem')
+        //         const chat = {
+        //           zaapId,
+        //           messageId,
+        //           type,
+        //           datIncl: new Date(),
+        //           telefone: message.Phone,
+        //           mensagem: message.Message,
+        //         }
 
-                console.log('chat', chat)
-              }
-            })
-          )
-        }
+        //         console.log('chat', chat)
+        //       }
+        //     })
+        //   )
+        // }
 
         return request.body
       } catch (error) {
