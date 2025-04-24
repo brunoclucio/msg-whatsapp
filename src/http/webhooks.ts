@@ -1,9 +1,5 @@
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
-import type {
-  MessageQueueProps,
-  MessageReceivedWebhookProps,
-  MessageSendWebhookProps,
-} from '../@types/types'
+import type { MessageReceivedWebhookProps, MessageSendWebhookProps } from '../@types/types'
 import { env } from '../env'
 import { ClientError } from '../errors/client-error'
 import { api } from '../lib/axios'
@@ -45,7 +41,7 @@ async function MessageSendWebhook(data: MessageSendWebhookProps) {
     const { zaapId, messageId, type } = data
 
     //Recupera as mensagens na fila da API.
-    const { data: messages } = await api.get<MessageQueueProps[]>('/queue', {
+    const { data: messages } = await api.get('/queue', {
       headers: {
         'Client-Token': env.CLIENT_TOKEN,
       },
