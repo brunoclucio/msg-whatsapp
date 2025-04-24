@@ -12,8 +12,8 @@ app.register(cors, {
 
 app.setErrorHandler(errorHandler)
 
-app.register(routes)
 app.register(webhooks)
+app.register(routes)
 
 app
   .listen({
