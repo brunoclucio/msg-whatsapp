@@ -21,9 +21,10 @@ export async function routes(app: FastifyInstance) {
     try {
       const { phone, message } = request.body
 
-      const text = {
+      const text: MessageSendTextProps = {
         phone,
         message,
+        delayMessage: 5,
       }
 
       const { data } = await api.post<MessageSendTextProps>('/send-text', text, {
@@ -47,9 +48,10 @@ export async function routes(app: FastifyInstance) {
 
         const { phone, message } = request.body
 
-        const text = {
+        const text: MessageSendButtonListProps = {
           phone,
           message,
+          delayMessage: 5,
           buttonList: {
             buttons: [
               {
@@ -85,9 +87,10 @@ export async function routes(app: FastifyInstance) {
         console.log('body', request.body)
         const { phone, message } = request.body
 
-        const text = {
+        const text: MessageSendOptionListProps = {
           phone,
           message,
+          delayMessage: 5,
           optionList: {
             title: 'Opções disponíveis',
             buttonLabel: 'Abrir lista de opções',

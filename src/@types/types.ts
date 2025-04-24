@@ -1,11 +1,15 @@
 export type MessageSendTextProps = {
   phone: string
   message: string
+  delayMessage?: number
+  delayTyping?: number
+  editMessageId?: string
 }
 
 export type MessageSendOptionListProps = {
   phone: string
   message: string
+  delayMessage?: number
   optionList: OptionListProps
 }
 
@@ -33,7 +37,10 @@ export type OptionProps = {
   title: string
 }
 
-export type MessageSendButtonListProps = MessageSendTextProps & {
+export type MessageSendButtonListProps = Omit<
+  MessageSendTextProps,
+  'delayTyping' | 'editMessageId'
+> & {
   buttonList: ButtonListProps
 }
 
