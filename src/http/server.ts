@@ -6,13 +6,12 @@ import { webhooks } from './webhooks'
 
 const app = fastify()
 
-app.setErrorHandler(errorHandler)
-app.register(webhooks)
-
 app.register(cors, {
   origin: '*',
 })
 
+app.setErrorHandler(errorHandler)
+app.register(webhooks)
 app.register(routes)
 
 app

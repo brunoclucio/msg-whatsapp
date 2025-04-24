@@ -32,6 +32,8 @@ export async function routes(app: FastifyInstance) {
         },
       })
 
+      console.log('data', data)
+
       return data
     } catch (error) {
       console.log('Error:', error)
@@ -69,6 +71,8 @@ export async function routes(app: FastifyInstance) {
             'Client-Token': env.CLIENT_TOKEN,
           },
         })
+
+        console.log('data', data)
 
         return data
       } catch (error) {
@@ -112,6 +116,8 @@ export async function routes(app: FastifyInstance) {
           },
         })
 
+        console.log('data', data)
+
         return data
       } catch (error) {
         console.log('Error:', error)
@@ -131,6 +137,8 @@ export async function routes(app: FastifyInstance) {
             'Client-Token': env.CLIENT_TOKEN,
           },
         })
+
+        console.log('data', data)
 
         return data
       } catch (error) {
@@ -159,6 +167,8 @@ export async function routes(app: FastifyInstance) {
             },
           }
         )
+
+        console.log('data', data)
 
         return data
       } catch (error) {
