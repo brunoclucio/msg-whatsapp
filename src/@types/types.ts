@@ -87,6 +87,17 @@ export type MessageReceivedWebhookProps = {
   text: Text
 }
 
+export type MessageStatusChangeWebhookProps = {
+  instanceId: string
+  status: string
+  ids: string[]
+  momment: number
+  phoneDevice: number
+  phone: string
+  type: string
+  isGroup: boolean
+}
+
 export type Text = {
   message: string
   descritpion?: string
